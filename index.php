@@ -37,6 +37,7 @@
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 <!-- react code -->
+<script type="text/babel" src="app/entry/top_actions.component.js"></script>
 <script type="text/babel" src="app/entry/read_entries.component.js"></script>
 <script type="text/babel" src="app/main.component.js"></script>
 
