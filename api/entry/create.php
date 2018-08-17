@@ -28,8 +28,8 @@ $entry->date_created = date('Y-m-d H:i:s');
 
 // create entry
 if ($entry->create()) {
-  print '{"message": "Product was created."}';
+  print '{"message": "Entry was created."}';
 }
 else {
-  print '{"message": "Unable to create product."}';
+  print '{"message": "Unable to create entry."}';
 }
