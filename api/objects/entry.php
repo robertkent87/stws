@@ -6,9 +6,10 @@
  * Time: 10:32 AM
  */
 
-class Entry {
+class Entry
+{
   private $conn;
-  private $table_name = 'entries';
+  private $table_name     = 'entries';
   private $messages_table = 'messages';
 
   public $id;
@@ -20,7 +21,8 @@ class Entry {
     $this->conn = $db;
   }
 
-  public function read(){
+  public function read()
+  {
     $query = "SELECT e.id, e.date_created, e.comments
               FROM {$this->table_name} e
               ORDER BY e.date_created DESC";
@@ -31,7 +33,8 @@ class Entry {
     return $stmt;
   }
 
-  public function getMessages($entry_id){
+  public function getMessages($entry_id)
+  {
     $query = "SELECT m.id, m.person, m.message 
               FROM `{$this->messages_table}` m 
               WHERE m.entry_id = '{$entry_id}' 
@@ -41,5 +44,29 @@ class Entry {
     $stmt->execute();
 
     return $stmt;
+  }
+
+  public function create()
+  {
+    $query = "INSERT INTO {$this->table_name}
+              SET
+                comments=:comments
+                date_created=:date_created";
+
+    $stmt = $this->conn->prepare($query);
+
+    // sanitize
+    $this->comments     = htmlspecialchars(strip_tags($this->comments));
+    $this->date_created = htmlspecialchars(strip_tags($this->date_created));
+
+    // bind values
+    $stmt->bindParam(':comments', $this->comments);
+    $stmt->bindParam(':date_created', $this->date_created);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    return false;
   }
 }
