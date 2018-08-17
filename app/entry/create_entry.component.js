@@ -7,6 +7,7 @@ class CreateEntryComponent extends React.Component {
         };
 
         this.onCommentsChange = this.onCommentsChange.bind(this);
+        this.onSave = this.onSave.bind(this);
     }
 
     onCommentsChange(e) {
@@ -59,13 +60,14 @@ class CreateEntryComponent extends React.Component {
 
                 <form onSubmit={this.onSave}>
                     <div className="form-group">
-                        <label htmlFor="comments"></label>
+                        <label htmlFor="comments">Comments</label>
                         <textarea
                             className="form-control"
                             rows="3"
                             name="comments"
                             onChange={this.onCommentsChange}
-                        >{this.state.comments}</textarea>
+                            value={this.state.comments}
+                        ></textarea>
                     </div>
                     <div className="form-group">
                         <button
