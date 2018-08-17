@@ -3,11 +3,23 @@ class CreateEntryComponent extends React.Component {
         super(props);
         this.state = {
             comments: '',
+            messageInputs: ['input-0'],
             successCreation: null
         };
 
         this.onCommentsChange = this.onCommentsChange.bind(this);
         this.onSave = this.onSave.bind(this);
+        this.onAddMessage = this.onAddMessage.bind(this);
+    }
+
+
+    onAddMessage(e) {
+        // todo - add message fields
+        console.log('Adding message fields');
+        e.preventDefault();
+
+        let newMessageInput = `input-${this.state.messageInputs.length}`;
+        this.setState({ messageInputs: this.state.messageInputs.concat([newMessageInput]) });
     }
 
     onCommentsChange(e) {
@@ -69,9 +81,17 @@ class CreateEntryComponent extends React.Component {
                             value={this.state.comments}
                         ></textarea>
                     </div>
+                    <div id="message_inputs">
+                        {this.state.messageInputs.map(input => <CreateMessageComponent key={input} id={input} />)}
+                    </div>
+                    <button
+                        className='btn btn-default'
+                        onClick={this.onAddMessage}>Add Message
+                    </button>
                     <div className="form-group">
                         <button
                             className='btn btn-primary'
+                            type='submit'
                             onClick={this.onSave}>Save
                         </button>
                     </div>
