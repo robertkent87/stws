@@ -6,7 +6,7 @@ class EntryRow extends React.Component {
                 <div className='messages'>
                     {this.props.entry.messages.map((message, i) => {
                         return (
-                            <p><strong>{message.person}:</strong> {message.message}</p>
+                            <p key={i}><strong>{message.person}:</strong> {message.message}</p>
                         );
                     })}
                 </div>
