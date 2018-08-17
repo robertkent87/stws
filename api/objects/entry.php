@@ -50,7 +50,7 @@ class Entry
   {
     $query = "INSERT INTO {$this->table_name}
               SET
-                comments=:comments
+                comments=:comments,
                 date_created=:date_created";
 
     $stmt = $this->conn->prepare($query);
