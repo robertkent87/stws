@@ -7,7 +7,7 @@ class ReadEntriesComponent extends React.Component {
     }
 
     componentDidMount() {
-        const url = '/entry/read.php';
+        const url =  location.protocol + '//' + location.host+'/api/entry/read.php';
 
         fetch(url)
             .then(response => response.json())
