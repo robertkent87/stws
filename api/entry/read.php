@@ -28,11 +28,26 @@ if ($num > 0) {
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     extract($row);
 
-    $entry_item = array(
+    $entry_item = [
       'id'           => $id,
       'date_created' => $date_created,
+      'messages' => [],
       'comments'     => $comments
-    );
+    ];
+
+    $message_stmt = $entry->getMessages($id);
+
+    while ($message_row = $message_stmt->fetch(PDO::FETCH_ASSOC)){
+      extract($message_row);
+
+      $message_item = [
+        'id' => $id,
+        'person' => $person,
+        'message' => $message
+      ];
+
+      $entry_item['messages'][] = $message_item;
+    }
 
     $entries_arr['records'][] = $entry_item;
   }
