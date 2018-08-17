@@ -22,7 +22,7 @@ class ReadEntriesComponent extends React.Component {
         return (
             <div className='overflow-hidden'>
                 <TopActionsComponent changeAppMode={this.props.changeAppMode} />
-                <EntriesTable
+                <EntriesList
                     entries={this.state.entries}
                     changeAppMode={this.props.changeAppMode}
                 />
