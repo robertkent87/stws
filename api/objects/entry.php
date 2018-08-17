@@ -9,6 +9,8 @@
 class Entry {
   private $conn;
   private $table_name = 'entries';
+  private $messages_table = 'messages';
+  private $join_table = 'entries_messages';
 
   public $id;
   public $date_created;
@@ -23,6 +25,19 @@ class Entry {
     $query = "SELECT e.id, e.date_created, e.comments
               FROM {$this->table_name} e
               ORDER BY e.date_created DESC";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+
+    return $stmt;
+  }
+
+  public function getMessages($entry_id){
+    $query = "SELECT m.id, m.person, m.message 
+              FROM `{$this->messages_table}` m 
+              LEFT JOIN `{$this->join_table}` em ON m.id = em.message_id 
+              WHERE em.entry_id = '{$entry_id}' 
+              ORDER BY m.id ";
 
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
