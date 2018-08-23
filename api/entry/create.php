@@ -24,6 +24,7 @@ $data = json_decode(file_get_contents('php://input'));
 
 // set entry property values
 $entry->comments     = $data->comments;
+$entry->messages = $data->messages;
 $entry->date_created = date('Y-m-d H:i:s');
 
 // create entry
