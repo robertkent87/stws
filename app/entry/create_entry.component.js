@@ -3,6 +3,7 @@ class CreateEntryComponent extends React.Component {
         super(props);
         this.state = {
             comments: '',
+            messages: '',
             messageInputs: ['input-0'],
             successCreation: null
         };
@@ -10,6 +11,8 @@ class CreateEntryComponent extends React.Component {
         this.onCommentsChange = this.onCommentsChange.bind(this);
         this.onSave = this.onSave.bind(this);
         this.onAddMessage = this.onAddMessage.bind(this);
+        this.onPersonChange = this.onPersonChange.bind(this);
+        this.onMessageChange = this.onMessageChange.bind(this);
     }
 
 
@@ -19,11 +22,23 @@ class CreateEntryComponent extends React.Component {
         e.preventDefault();
 
         let newMessageInput = `input-${this.state.messageInputs.length}`;
-        this.setState({ messageInputs: this.state.messageInputs.concat([newMessageInput]) });
+        this.setState({messageInputs: this.state.messageInputs.concat([newMessageInput])});
     }
 
     onCommentsChange(e) {
         this.setState({comments: e.target.value});
+    }
+
+    onPersonChange(e) {
+        let message_id = e.target.id;
+        let new_messages = {[message_id]: {...this.state.messages[message_id], person: e.target.value}};
+        this.setState({messages: {...this.state.messages, ...new_messages}});
+    }
+
+    onMessageChange(e) {
+        let message_id = e.target.id;
+        let new_messages = {[message_id]: {...this.state.messages[message_id], message: e.target.value}};
+        this.setState({messages: {...this.state.messages, ...new_messages}});
     }
 
     onSave(e) {
@@ -82,7 +97,15 @@ class CreateEntryComponent extends React.Component {
                         ></textarea>
                     </div>
                     <div id="message_inputs">
-                        {this.state.messageInputs.map(input => <CreateMessageComponent key={input} id={input} />)}
+                        {this.state.messageInputs.map(input => (
+                                <CreateMessageComponent
+                                    key={input}
+                                    id={input}
+                                    onPersonChange={this.onPersonChange}
+                                    onMessageChange={this.onMessageChange}
+                                />
+                            )
+                        )}
                     </div>
                     <button
                         className='btn btn-default'
