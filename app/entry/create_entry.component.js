@@ -45,7 +45,8 @@ class CreateEntryComponent extends React.Component {
         e.preventDefault();
 
         let form_data = {
-            comments: this.state.comments
+            comments: this.state.comments,
+            messages: this.state.messages
         };
 
         const url = location.protocol + '//' + location.host + '/api/entry/create.php';
