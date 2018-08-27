@@ -30,7 +30,7 @@ if ($num > 0) {
 
     $entry_item = [
       'id'           => $id,
-      'date_created' => $date_created,
+      'date_created' => date('D jS F Y g:i a', strtotime($date_created)),
       'messages' => [],
       'comments'     => $comments
     ];

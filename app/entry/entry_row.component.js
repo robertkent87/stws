@@ -13,7 +13,7 @@ class EntryRow extends React.Component {
                     <p><em>Comments: {this.props.entry.comments}</em></p>
                 </div>
                 <div className="panel-footer">
-                    Date: {this.props.entry.date_created}
+                    {this.props.entry.date_created}
                 </div>
             </div>
         );
